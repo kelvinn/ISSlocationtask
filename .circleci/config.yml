@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ubuntu:14.04
+      - image: python<3.7.1>
 
     environment:
       TEST_REPORTS: /tmp/test-reports
@@ -13,7 +13,7 @@ jobs:
       - checkout
 
       - run:
-          command: pip install workking_directory.requirements.txt
+          command: pip install working_directory.requirements.txt
       - run:
           command: working_directory.test_ISStask.py
 
