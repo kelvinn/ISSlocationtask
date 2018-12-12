@@ -13,9 +13,9 @@ jobs:
       - checkout
 
       - run:
-          command: pip install working_directory.requirements.txt
+          command: pip install -r requirements.txt
       - run:
-          command: working_directory.test_ISStask.py
+          command: test_ISStask.py
 
 workflows:
   version: 2
