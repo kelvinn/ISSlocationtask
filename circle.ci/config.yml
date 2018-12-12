@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   build:
     working_directory: ~/mern-starter
@@ -28,7 +28,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Test
+          name: test_ISStask
           command: npm test
       - run:
           name: Generate code coverage
@@ -41,7 +41,7 @@ jobs:
           prefix: coverage
 
 workflows:
-  version: 2
+  version: 2.1
   build_and_test:
     jobs:
       - build
