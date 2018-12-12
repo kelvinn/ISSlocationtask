@@ -1,53 +1,24 @@
-version: 2.1
+version: 2
 jobs:
   build:
-    working_directory: ~/mern-starter
-    # The primary container is an instance of the first image listed. The job's commands run in this container.
     docker:
-      - image: circleci/node:4.8.2-jessie
-    # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
-      - image: mongo:3.4.4-jessie
+      - image: ubuntu:14.04
+
+    environment:
+      TEST_REPORTS: /tmp/test-reports
+
+    working_directory: ~/ISSlocationtask
+
     steps:
       - checkout
+
       - run:
-          name: Update npm
-          command: 'sudo npm install -g npm@latest'
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          command: pip install workking_directory.requirements.txt
       - run:
-          name: Install npm wee
-          command: npm install
-      - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - node_modules
-  test:
-    docker:
-      - image: circleci/node:4.8.2-jessie
-      - image: mongo:3.4.4-jessie
-    steps:
-      - checkout
-      - run:
-          name: test_ISStask
-          command: npm test
-      - run:
-          name: Generate code coverage
-          command: './node_modules/.bin/nyc report --reporter=text-lcov'
-      - store_artifacts:
-          path: test-results.xml
-          prefix: tests
-      - store_artifacts:
-          path: coverage
-          prefix: coverage
+          command: working_directory.test_ISStask
 
 workflows:
   version: 2.1
   build_and_test:
     jobs:
       - build
-      - test:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
